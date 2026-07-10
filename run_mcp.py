@@ -265,6 +265,9 @@ def create_mcp(*, headless: bool | None = None, mock: bool | None = None) -> Rem
     actual_headless = _env_bool("HEADLESS", False) if headless is None else headless
     heartbeat = float(os.environ.get("LABOS_HEARTBEAT_INTERVAL", "15"))
     mcp = LoggingRemoteMCP(
+        url=os.environ.get("LABOS_URL", ""),
+        api_key=os.environ.get("LABOS_API_KEY", ""),
+        device_id=os.environ.get("LABOS_DEVICE_ID", "labos-robot-runtime"),
         name="labos-robot-runtime",
         heartbeat_interval=heartbeat,
         metadata={
